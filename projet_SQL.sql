@@ -2,6 +2,7 @@
 #        Script MySQL.
 #------------------------------------------------------------
 
+Create database projetSI if not exists;
 
 #------------------------------------------------------------
 # Table: Consultant
@@ -96,4 +97,39 @@ CREATE TABLE EquipeProjet(
 	,CONSTRAINT EquipeProjet_Consultant_FK FOREIGN KEY (id) REFERENCES Consultant(id)
 	,CONSTRAINT EquipeProjet_Projet0_FK FOREIGN KEY (id_Projet) REFERENCES Projet(id)
 )ENGINE=InnoDB;
+
+
+#populate database : 
+# Add ingénieurs
+
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code1", "name1","firstname1","0606060606","name1@gmail.com", "2019-01-01",false);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code2", "name2","firstname2","0606060606","name1@gmail.com", "2019-01-01",false);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code3", "name3","firstname3","0606060606","name1@gmail.com", "2019-01-01",false);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code4", "name4","firstname4","0606060606","name1@gmail.com", "2019-01-01",false);
+
+
+# Add Managers
+
+insert into Manager values();
+insert into Manager values();
+insert into Manager values();
+
+
+#Add Projets
+
+insert into Projet(start_date, end_date, id_Manager) values ("2019-01-01", "2019-02-01",1);
+insert into Projet(start_date, end_date, id_Manager) values ("2018-01-01", "2018-02-01",1);
+insert into Projet(start_date, end_date, id_Manager) values ("2019-10-01", "2018-11-01",2);
+insert into Projet(start_date, end_date, id_Manager) values ("2018-12-01", "2019-02-01",2);
+insert into Projet(start_date, end_date, id_Manager) values ("2019-01-01", "2019-02-02",3);
+insert into Projet(start_date, end_date, id_Manager) values ("2018-07-01", "2018-08-01",3);
+
+#Add consultants in projects
+
+insert into EquipeProjet(id, id_projet) values (1,1);
+insert into EquipeProjet(id, id_projet) values (1,2);
+insert into EquipeProjet(id, id_projet) values (2,1);
+insert into EquipeProjet(id, id_projet) values (2,2);
+insert into EquipeProjet(id, id_projet) values (3,2);
+insert into EquipeProjet(id, id_projet) values (3,3);
 
