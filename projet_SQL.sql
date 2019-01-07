@@ -2,63 +2,24 @@
 #        Script MySQL.
 #------------------------------------------------------------
 
-Create database projetSI if not exists;
-
 #------------------------------------------------------------
 # Table: Consultant
 #------------------------------------------------------------
 
 CREATE TABLE Consultant(
-        id                Int  Auto_increment  NOT NULL ,
-        code              Varchar (50) NOT NULL ,
-        name_c            Varchar (50) NOT NULL ,
-        firstname_c       Varchar (50) NOT NULL ,
-        phone             Varchar (50) NOT NULL ,
-        mail              Varchar (50) NOT NULL ,
-        hired_date        Date NOT NULL ,
-        is_chef_de_projet Bool NOT NULL
+        id          Int  Auto_increment  NOT NULL ,
+        code        Varchar (50) NOT NULL ,
+        name_c      Varchar (50) NOT NULL ,
+        firstname_c Varchar (50) NOT NULL ,
+        phone       Varchar (50) NOT NULL ,
+        mail        Varchar (50) NOT NULL ,
+        hired_date  Date NOT NULL ,
+        type_metier Varchar (5) NOT NULL ,
+        specialite  Varchar (50) DEFAULT NULL ,
+        TJM_Ing     Int DEFAULT NULL,
+        TJM_CP      Int DEFAULT NULL
 	,CONSTRAINT Consultant_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: ChefDeProjet
-#------------------------------------------------------------
-
-CREATE TABLE ChefDeProjet(
-        id                Int NOT NULL ,
-        code              Varchar (50) NOT NULL ,
-        name_c            Varchar (50) NOT NULL ,
-        firstname_c       Varchar (50) NOT NULL ,
-        phone             Varchar (50) NOT NULL ,
-        mail              Varchar (50) NOT NULL ,
-        hired_date        Date NOT NULL ,
-        is_chef_de_projet Bool NOT NULL
-	,CONSTRAINT ChefDeProjet_PK PRIMARY KEY (id)
-
-	,CONSTRAINT ChefDeProjet_Consultant_FK FOREIGN KEY (id) REFERENCES Consultant(id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: Ingénieur
-#------------------------------------------------------------
-
-CREATE TABLE Ingenieur(
-        id                Int NOT NULL ,
-        speciality        Varchar (50) NOT NULL ,
-        code              Varchar (50) NOT NULL ,
-        name_c            Varchar (50) NOT NULL ,
-        firstname_c       Varchar (50) NOT NULL ,
-        phone             Varchar (50) NOT NULL ,
-        mail              Varchar (50) NOT NULL ,
-        hired_date        Date NOT NULL ,
-        is_chef_de_projet Bool NOT NULL
-	,CONSTRAINT Ingenieur_PK PRIMARY KEY (id)
-
-	,CONSTRAINT Ingenieur_Consultant_FK FOREIGN KEY (id) REFERENCES Consultant(id)
-)ENGINE=InnoDB;
-
 
 #------------------------------------------------------------
 # Table: Manager
@@ -102,10 +63,17 @@ CREATE TABLE EquipeProjet(
 #populate database : 
 # Add ingénieurs
 
-insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code1", "name1","firstname1","0606060606","name1@gmail.com", "2019-01-01",false);
-insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code2", "name2","firstname2","0606060606","name1@gmail.com", "2019-01-01",false);
-insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code3", "name3","firstname3","0606060606","name1@gmail.com", "2019-01-01",false);
-insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, is_chef_de_projet) VALUES ("code4", "name4","firstname4","0606060606","name1@gmail.com", "2019-01-01",false);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, specialite, TJM_Ing) VALUES ("code1", "name1","firstname1","0606060606","name1@gmail.com", "2019-01-01","I", "etudes", "200");
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, specialite, TJM_Ing) VALUES ("code2", "name2","firstname2","0606060606","name2@gmail.com", "2019-01-01","I", "developpement", "200");
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, specialite, TJM_Ing) VALUES ("code3", "name3","firstname3","0606060606","name3@gmail.com", "2019-01-01","I", "etudes", "200");
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, specialite, TJM_Ing) VALUES ("code4", "name4","firstname4","0606060606","name4@gmail.com", "2019-01-01","I", "developpement", "200");
+
+#Add Chef de projets
+
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, TJM_CP) VALUES ("code5", "name5","firstname5","0606060606","name5@gmail.com", "2019-01-01","P", 250);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, TJM_CP) VALUES ("code6", "name6","firstname6","0606060606","name6@gmail.com", "2019-01-01","P", 250);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, TJM_CP) VALUES ("code3", "name7","firstname7","0606060606","name7@gmail.com", "2019-01-01","P", 250);
+insert into Consultant (code, name_c, firstname_c, phone, mail, hired_date, type_metier, TJM_CP) VALUES ("code8", "name8","firstname8","0606060606","name8@gmail.com", "2019-01-01","P", 250);
 
 
 # Add Managers
