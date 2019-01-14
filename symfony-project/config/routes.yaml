@@ -1,3 +1,19 @@
 index:
     path: /
     controller: App\Controller\MainController:index
+
+list_projet:
+    path: /list
+    controller: App\Controller\MainController:index
+
+update_projet:
+    path: /update/{id}
+    controller: App\Controller\MainController:update
+
+create_projet:
+    path: /create/
+    controller: App\Controller\MainController:index
+
+delete_projet:
+    path: /delete/{id}
+    controller: App\Controller\MainController:delete
