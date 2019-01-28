@@ -12,8 +12,20 @@ update_projet:
 
 create_projet:
     path: /create/
-    controller: App\Controller\ProjetController:index
+    controller: App\Controller\ProjetController:create
 
 delete_projet:
     path: /delete/{id}
     controller: App\Controller\ProjetController:delete
+
+affect_projet:
+    path: /affect/{id}
+    controller: App\Controller\ProjetController:affect
+
+add_to_project:
+    path: /add_to_project/{id_projet}/{id_consultant}
+    controller: App\Controller\ProjetController:addToProject
+
+delete_from_project:
+    path: /delete_from_project/{id_projet}/{id_consultant}
+    controller: App\Controller\ProjetController:deleteFromProject

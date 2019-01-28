@@ -1,13 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des projets{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
+    {% if role == 'manager' %}
 <div class="example-wrapper">
     <h1>Liste des projets</h1>
         <table>
@@ -16,20 +13,85 @@
                 <td>Id du projet</td>
                 <td>Date de début</td>
                 <td>Date de fin</td>
+                <td>Type de projet</td>
             </tr>
             </thead>
             <tbody>
             {% for projet in projetList %}
             <tr>
                 <td>{{ projet.id }}</td>
-                <td>{{ projet.startDate|date }}</td>
-                <td>{{ projet.endDate|date }}</td>
-                <td> <a role="button" href="{{ path('update_projet', { 'id' : projet.id }) }}">Update</a></td>
+                <td>{{ projet.startDate|date('d/m/Y') }}</td>
+                <td>{{ projet.endDate|date('d/m/Y') }}</td>
+                <td>{{ projet.projectType }}</td>
+                {% if role == "manager" %}
+                <td> <a role="button" href="{{ path('update_projet', { 'id' : projet.id }) }}">Mettre à jour</a></td>
+                <td> <a role="button" href="{{ path('delete_projet', { 'id' : projet.id }) }}">Supprimer</a></td>
+                    <td> <a role="button" href="{{ path('affect_projet', { 'id' : projet.id }) }}">Affecter à un projet</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>
         </table>
+    <br />
+    <button><a href="{{ path('create_projet') }}">Créer un nouveau projet</a></button>
 </div>
-    {{ role }}
+    <div class="example-wrapper">
+        <h1>Liste des consultants</h1>
+        <table>
+            <thead>
+            <tr>
+                <td>Id du consultant</td>
+                <td>Code</td>
+                <td>Nom</td>
+                <td>Prenom</td>
+                <td>Role</td>
+                <td>Date d'embauche</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for consultant in consultantList %}
+                <tr>
+                    <td>{{ consultant.id }}</td>
+                    <td>{{ consultant.code }}</td>
+                    <td>{{ consultant.nameC }}</td>
+                    <td>{{ consultant.firstnameC }}</td>
+                    <td>{{ consultant.typeMetier }}</td>
+                    <td>{{ consultant.hiredDate|date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+        {% elseif role == 'ingenieur' %}
+            <div class="example-wrapper">
+                <h1>Vos projets</h1>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Id du projet</td>
+                        <td>Date de début</td>
+                        <td>Date de fin</td>
+                        <td>Type de projet</td>
+                        <td>Temps passé (en jours)</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for key,projet in projetList %}
+                        <tr>
+                            <td>{{ projet.id }}</td>
+                            <td>{{ projet.startDate|date('d/m/Y') }}</td>
+                            <td>{{ projet.endDate|date('d/m/Y') }}</td>
+                            <td>{{ projet.projectType }}</td>
+                            <td>{{ key }}</td>
+                            <td> <a role="button" href="">Modifier le nombre de jours travaillés</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    {% endif %}
 
 {% endblock %}

@@ -13,7 +13,6 @@ use App\Entity\Consultant;
 use App\Entity\Manager;
 use App\Entity\User;
 use App\Form\LoginType;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -56,6 +55,7 @@ class MainController extends AbstractController
                         session_start();
                     }
                     $_SESSION['role'] = $role;
+                    $_SESSION['id'] = $user->getId();
                     return $this->redirectToRoute('list_projet');
                 }
             } else {

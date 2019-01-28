@@ -47,6 +47,13 @@ class Projet
     private $idManager;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="project_type", type="string", nullable=true)
+     */
+    private $projectType;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -89,7 +96,7 @@ class Projet
     /**
      * @return \Manager
      */
-    public function getIdManager(): \Manager
+    public function getIdManager(): Manager
     {
         return $this->idManager;
     }
@@ -97,9 +104,27 @@ class Projet
     /**
      * @param \Manager $idManager
      */
-    public function setIdManager(\Manager $idManager): void
+    public function setIdManager(Manager $idManager): void
     {
         $this->idManager = $idManager;
     }
+
+    /**
+     * @return string
+     */
+    public function getProjectType(): string
+    {
+        return $this->projectType;
+    }
+
+    /**
+     * @param string $projectType
+     */
+    public function setProjectType(string $projectType): void
+    {
+        $this->projectType = $projectType;
+    }
+
+
 
 }
