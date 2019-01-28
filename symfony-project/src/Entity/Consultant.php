@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Consultant
  *
- * @ORM\Table(name="Consultant")
+ * @ORM\Table(name="Consultant", indexes={@ORM\Index(name="Consultant_User_FK", columns={"id"})})
  * @ORM\Entity
  */
 class Consultant
@@ -17,8 +17,7 @@ class Consultant
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\ManyToMany(targetEntity="App\Entity\Projet")
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
      */
     private $id;
 
@@ -91,13 +90,6 @@ class Consultant
      * @ORM\Column(name="TJM_CP", type="integer", nullable=true)
      */
     private $tjmCp;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", nullable=false)
-     */
-    private $password;
 
     /**
      * @return int
@@ -266,21 +258,4 @@ class Consultant
     {
         $this->tjmCp = $tjmCp;
     }
-
-    /**
-     * @return string
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
 }

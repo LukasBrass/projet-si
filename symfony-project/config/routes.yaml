@@ -4,16 +4,16 @@ index:
 
 list_projet:
     path: /list
-    controller: App\Controller\MainController:index
+    controller: App\Controller\ProjetController:index
 
 update_projet:
     path: /update/{id}
-    controller: App\Controller\MainController:update
+    controller: App\Controller\ProjetController:update
 
 create_projet:
     path: /create/
-    controller: App\Controller\MainController:index
+    controller: App\Controller\ProjetController:index
 
 delete_projet:
     path: /delete/{id}
-    controller: App\Controller\MainController:delete
+    controller: App\Controller\ProjetController:delete

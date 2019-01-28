@@ -10,7 +10,10 @@ namespace App\Controller;
 
 
 use App\Entity\Consultant;
+use App\Entity\Manager;
+use App\Entity\User;
 use App\Form\LoginType;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,21 +31,36 @@ class MainController extends AbstractController
         if($form->isSubmitted() and $form->isValid()) {
             $badResponse = 'Wrong name/password';
             $em = $this->getDoctrine()->getManager();
+            $data = $form->getData();
+            $role = null;
             /** @var Consultant $consultant */
-            $consultant = $em->getRepository(Consultant::class)->findOneBy(
+            $user = $em->getRepository(User::class)->findOneBy(
                 [
-                    'nameC' => $request->request->get('login'),
-                    'password' => $request->request->get('password')
+                    'login' => $data['login'],
+                    'password' => $data['password']
                 ]);
-            if($consultant) {
-                if($consultant->getTypeMetier() === 'I')
-                    $role = 'ingenieur';
-                if($consultant->getTypeMetier() === 'P')
-                    $role = 'chief';
-                $session = $this->get('session');
-                $session->set('role', $role);
+            if($user) {
+                $consultant = $em->getRepository(Consultant::class)->find($user->getId());
+                if ($consultant) {
+                    if ($consultant->getTypeMetier() === 'I')
+                        $role = 'ingenieur';
+                    if ($consultant->getTypeMetier() === 'P')
+                        $role = 'chief';
+                } else {
+                    $manager = $em->getRepository(Manager::class)->find($user->getId());
+                    if ($manager)
+                        $role = 'manager';
+                }
+                if ($role) {
+                    if (session_status() == PHP_SESSION_NONE) {
+                        session_start();
+                    }
+                    $_SESSION['role'] = $role;
+                    return $this->redirectToRoute('list_projet');
+                }
+            } else {
+                $this->addFlash('error', 'Compte introuvable');
             }
-            return $this->redirectToRoute('list_projet');
         }
         return $this->render('default\index.html.twig',
             ['form' => $form->createView(),
