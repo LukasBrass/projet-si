@@ -7,28 +7,78 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Manager
  *
- * @ORM\Table(name="Manager", indexes={@ORM\Index(name="Manager_User_FK", columns={"id"})})
+ * @ORM\Table(name="Manager")
  * @ORM\Entity
  */
 class Manager
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\Column(name="IdManager", type="integer", nullable=false)
      */
-    private $id;
+    private $idManager;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomManager", type="string", nullable=false)
+     */
+    private $nomManager;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenomManager", type="string", nullable=false)
+     */
+    private $prenomManager;
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getIdManager(): int
     {
-        return $this->id;
+        return $this->idManager;
     }
 
+    /**
+     * @param int $idManager
+     */
+    public function setIdManager(int $idManager): void
+    {
+        $this->idManager = $idManager;
+    }
 
+    /**
+     * @return string
+     */
+    public function getNomManager(): string
+    {
+        return $this->nomManager;
+    }
+
+    /**
+     * @param string $nomManager
+     */
+    public function setNomManager(string $nomManager): void
+    {
+        $this->nomManager = $nomManager;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrenomManager(): string
+    {
+        return $this->prenomManager;
+    }
+
+    /**
+     * @param string $prenomManager
+     */
+    public function setPrenomManager(string $prenomManager): void
+    {
+        $this->prenomManager = $prenomManager;
+    }
 
 }

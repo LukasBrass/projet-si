@@ -5,126 +5,197 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Projet
- *
- * @ORM\Table(name="Projet", indexes={@ORM\Index(name="Projet_Manager_FK", columns={"id_Manager"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ProjetRepository")
+ * @ORM\Table(name="projet", indexes={@ORM\Index(name="Projet_Manager_FK", columns={"IdManager"}), @ORM\Index(name="Projet_TypeProjet0_FK", columns={"IdType"}), @ORM\Index(name="Projet_Client1_FK", columns={"IdClient"}), @ORM\Index(name="Projet_ChefProjet2_FK", columns={"Code"})})
  */
 class Projet
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\ManyToMany(targetEntity="App\Entity\Projet")
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="idProjet", type="integer", nullable=false)
      */
-    private $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start_date", type="date", nullable=false)
-     */
-    private $startDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end_date", type="date", nullable=false)
-     */
-    private $endDate;
-
-    /**
-     * @var Manager
-     *
-     * @ORM\ManyToOne(targetEntity="Manager")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_Manager", referencedColumnName="id")
-     * })
-     */
-    private $idManager;
+    private $idProjet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="project_type", type="string", nullable=true)
+     * @ORM\Column(name="nomProjet", type="string", nullable=false)
      */
-    private $projectType;
+    private $nomProjet;
+
+    /**
+     * @var \dateTime
+     *
+     * @ORM\Column(name="dateDebut", type="date", nullable=false)
+     */
+    private $dateDebut;
+
+    /**
+     * @var \dateTime
+     *
+     * @ORM\Column(name="dateFin", type="date", nullable=false)
+     */
+    private $dateFin;
+
+    /**
+     * @var Manager
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Manager", inversedBy="IdManager")
+     * @ORM\JoinColumn(name="IdManager", referencedColumnName="IdManager")
+     */
+    private $manager;
+
+    /**
+     * @var TypeProjet
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeProjet", inversedBy="IdType")
+     * @ORM\JoinColumn(name="IdType", referencedColumnName="IdType")
+
+     */
+    private $typeProjet;
+
+    /**
+     * @var Client
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="IdClient")
+     * @ORM\JoinColumn(name="IdClient", referencedColumnName="IdClient")
+
+     */
+    private $client;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="code", type="integer", nullable=false)
+     */
+    private $code;
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getIdProjet(): int
     {
-        return $this->id;
+        return $this->idProjet;
     }
 
     /**
-     * @return \DateTime
+     * @param int $idProjet
      */
-    public function getStartDate(): \DateTime
+    public function setIdProjet(int $idProjet): void
     {
-        return $this->startDate;
-    }
-
-    /**
-     * @param \DateTime $startDate
-     */
-    public function setStartDate(\DateTime $startDate): void
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getEndDate(): \DateTime
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * @param \DateTime $endDate
-     */
-    public function setEndDate(\DateTime $endDate): void
-    {
-        $this->endDate = $endDate;
-    }
-
-    /**
-     * @return \Manager
-     */
-    public function getIdManager(): Manager
-    {
-        return $this->idManager;
-    }
-
-    /**
-     * @param \Manager $idManager
-     */
-    public function setIdManager(Manager $idManager): void
-    {
-        $this->idManager = $idManager;
+        $this->idProjet = $idProjet;
     }
 
     /**
      * @return string
      */
-    public function getProjectType(): string
+    public function getNomProjet(): string
     {
-        return $this->projectType;
+        return $this->nomProjet;
     }
 
     /**
-     * @param string $projectType
+     * @param string $nomProjet
      */
-    public function setProjectType(string $projectType): void
+    public function setNomProjet(string $nomProjet): void
     {
-        $this->projectType = $projectType;
+        $this->nomProjet = $nomProjet;
     }
 
+    /**
+     * @return \dateTime
+     */
+    public function getDateDebut(): \dateTime
+    {
+        return $this->dateDebut;
+    }
 
+    /**
+     * @param \dateTime $dateDebut
+     */
+    public function setDateDebut(\dateTime $dateDebut): void
+    {
+        $this->dateDebut = $dateDebut;
+    }
 
+    /**
+     * @return \dateTime
+     */
+    public function getDateFin(): \dateTime
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * @param \dateTime $dateFin
+     */
+    public function setDateFin(\dateTime $dateFin): void
+    {
+        $this->dateFin = $dateFin;
+    }
+
+    /**
+     * @return Manager
+     */
+    public function getManager(): Manager
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param Manager $Manager
+     */
+    public function setManager(Manager $Manager): void
+    {
+        $this->manager = $Manager;
+    }
+
+    /**
+     * @return TypeProjet
+     */
+    public function getTypeProjet(): TypeProjet
+    {
+        return $this->typeProjet;
+    }
+
+    /**
+     * @param TypeProjet $typeProjet
+     */
+    public function setTypeProjet(TypeProjet $typeProjet): void
+    {
+        $this->typeProjet = $typeProjet;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setClient(Client $client): void
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setCode(int $code): void
+    {
+        $this->code = $code;
+    }
 }
