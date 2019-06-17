@@ -2,29 +2,13 @@ index:
     path: /
     controller: App\Controller\MainController:index
 
-list_projet:
-    path: /list
-    controller: App\Controller\ProjetController:index
+team:
+    path: /equipe
+    controller: App\Controller\EquipeController:index
 
-update_projet:
-    path: /update/{id}
-    controller: App\Controller\ProjetController:update
-
-create_projet:
-    path: /create/
-    controller: App\Controller\ProjetController:create
-
-delete_projet:
-    path: /delete/{id}
-    controller: App\Controller\ProjetController:delete
-
-affect_projet:
-    path: /affect/{id}
-    controller: App\Controller\ProjetController:affect
-
-add_to_project:
-    path: /add_to_project/{id_projet}/{id_consultant}
-    controller: App\Controller\ProjetController:addToProject
+team_details:
+    path: /equipe/{id_equipe}/
+    controller: App\Controller\EquipeController:equipeDetails
 
 delete_from_project:
     path: /delete_from_project/{id_projet}/{id_consultant}

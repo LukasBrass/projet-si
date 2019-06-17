@@ -15,14 +15,48 @@ class Equipe
      * @ORM\Id
      * @ORM\Column(name="idEquipe", type="integer", nullable=false)
      */
-    private $idEquipe;
+    private $id;
 
     /**
      * @var Manager
      *
-     * @ORM\Column(name="idManager", type="integer", nullable=false)
      * @ORM\ManyToOne(targetEntity="App\Entity\Manager", inversedBy="idManager")
+     * @ORM\JoinColumn(name="idManager", referencedColumnName="IdManager")
 
      */
     private $manager;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return Manager
+     */
+    public function getManager(): Manager
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @param Manager $manager
+     */
+    public function setManager(Manager $manager): void
+    {
+        $this->manager = $manager;
+    }
+
+
 }

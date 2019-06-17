@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projets{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+<h1>Liste des projets en cours</h1>
+<table>
+    <thead>
+    <tr>
+        <td>Id du consultant</td>
+        <td>Nom</td>
+        <td>Prenom</td>
+        <td>N° de téléphone</td>
+        <td>Email</td>
+        <td>Date d'arrivée</td>
+        <td>Statut</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for consultant in consultantList %}
+        <tr>
+            <td>{{ consultant.code }}</td>
+            <td>{{ consultant.nom }}</td>
+            <td>{{ consultant.prenom }}</td>
+            <td>{{ consultant.telephone }}</td>
+            <td>{{ consultant.mail}}</td>
+            <td>{{ consultant.HiringYear }}</td>
+            <td> {{ metierList[consultant.code] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br />
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projets{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+<h1>Liste des projets en cours</h1>
+<table>
+    <thead>
+    <tr>
+        <td>Id de l'équipe</td>
+        <td>Manager</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for equipe in equipeList %}
+        <tr>
+            <td>{{ equipe.id }}</td>
+            <td>{{ equipe.manager.nomManager }}</td>
+            <td> <a href="{{ path('team_details', {'id_equipe': equipe.id} ) }}">Squalala</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br />
+</div>
+{% endblock %}

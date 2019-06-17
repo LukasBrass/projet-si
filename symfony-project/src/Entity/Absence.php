@@ -32,9 +32,9 @@ class Absence
     private $jour;
 
     /**
-     * @var int
-     * @ORM\Id
+     * @var Consultant
      * @ORM\Column(name="code", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Consultant", inversedBy="code")
      */
     private $code;
 
@@ -94,17 +94,17 @@ class Absence
     }
 
     /**
-     * @return int
+     * @return Consultant
      */
-    public function getCode(): int
+    public function getCode(): Consultant
     {
         return $this->code;
     }
 
     /**
-     * @param int $code
+     * @param Consultant $code
      */
-    public function setCode(int $code): void
+    public function setCode(Consultant $code): void
     {
         $this->code = $code;
     }

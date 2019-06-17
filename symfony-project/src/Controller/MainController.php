@@ -17,7 +17,7 @@ class MainController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $ongoingProjectList = $em->getRepository(Projet::class)->findOngoingProjects(new \DateTime());
+        $ongoingProjectList = $em->getRepository(Projet::class)->findOngoingProjects(new \DateTime('2019-05-15'));
 
         return $this->render('default\index.html.twig',
             ['ongoingProjectList' => $ongoingProjectList]);
